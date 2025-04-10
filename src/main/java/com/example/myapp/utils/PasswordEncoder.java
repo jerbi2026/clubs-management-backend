@@ -13,10 +13,15 @@ public class PasswordEncoder {
     }
 
     public String encode(String password) {
+        System.out.println(bCryptPasswordEncoder.encode(password));
         return bCryptPasswordEncoder.encode(password);
     }
 
     public boolean matches(String rawPassword, String encodedPassword) {
+        System.out.println(bCryptPasswordEncoder.matches(rawPassword, encodedPassword));
+        System.out.println(rawPassword);
+        System.out.println(encodedPassword);
+
         return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
     }
 }

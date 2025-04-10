@@ -123,7 +123,6 @@ public class EvenementController {
     public ResponseEntity<Void> deleteEvenement(@PathVariable Long id) {
         return evenementService.getEvenementById(id)
                 .map(evenement -> {
-                    // Delete associated image if exists
                     if (evenement.getImageurl() != null) {
                         deleteImageFile(evenement.getImageurl());
                     }
@@ -151,10 +150,8 @@ public class EvenementController {
         }
     }
 
-    // Helper methods for image handling
     private String saveImage(MultipartFile file) {
         try {
-            // Generate unique filename to avoid conflicts
             String originalFilename = file.getOriginalFilename();
             String fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
             String newFilename = UUID.randomUUID().toString() + fileExtension;
@@ -179,7 +176,6 @@ public class EvenementController {
             Path filePath = this.fileStoragePath.resolve(filename).normalize();
             Files.deleteIfExists(filePath);
         } catch (IOException ex) {
-            // Log the error but don't throw exception
             System.err.println("Error deleting image file: " + ex.getMessage());
         }
     }

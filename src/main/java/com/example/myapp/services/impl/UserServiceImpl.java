@@ -74,8 +74,11 @@ public class UserServiceImpl implements UserService {
                 return user;
             }
         }
+        else{
+            throw new RuntimeException("Email introuvable");
+        }
 
-        throw new RuntimeException("Email ou mot de passe incorrect");
+        throw new RuntimeException("mot de passe incorrect");
     }
 
     @Override

@@ -104,7 +104,6 @@ public class UserController {
     public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequest loginRequest) {
         try {
             User authenticatedUser = userService.authenticateUser(loginRequest);
-            // Here you would typically generate a JWT token
             return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
@@ -145,7 +144,6 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         return userService.getUserById(id)
                 .map(user -> {
-                    // Delete associated avatar if exists
                     if (user.getAvatar() != null) {
                         deleteAvatarFile(user.getAvatar());
                     }
